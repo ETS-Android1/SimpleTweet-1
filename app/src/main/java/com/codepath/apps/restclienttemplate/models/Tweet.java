@@ -18,7 +18,7 @@ import java.util.ListIterator;
 public class Tweet {
 
     public String body;
-    public static String createAt;
+    public String createAt;
     public User user;
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
@@ -37,8 +37,9 @@ public class Tweet {
         }
         return tweets;
     }
-    public static String getFormattedTimestamp(){
-        return TimeFormatter.getTimeDifference(createAt);
+    public String getFormattedTimestamp(){
+        String timeDifference = TimeFormatter.getTimeDifference(createAt);
+        return timeDifference;
     }
 
 }
