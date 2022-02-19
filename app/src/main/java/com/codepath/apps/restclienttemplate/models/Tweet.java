@@ -3,6 +3,8 @@ package com.codepath.apps.restclienttemplate.models;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.codepath.apps.restclienttemplate.TimeFormatter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +18,7 @@ import java.util.ListIterator;
 public class Tweet {
 
     public String body;
-    public String createAt;
+    public static String createAt;
     public User user;
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
@@ -24,6 +26,7 @@ public class Tweet {
             tweet.body = jsonObject.getString("text");
             tweet.createAt = jsonObject.getString("created_at");
             tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+
         return tweet;
     }
 
@@ -34,4 +37,9 @@ public class Tweet {
         }
         return tweets;
     }
+    public static String getFormattedTimestamp(){
+        return TimeFormatter.getTimeDifference(createAt);
+    }
+
 }
+
