@@ -29,7 +29,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:fontFamily="@font/abril_fatface"
+        android:fontFamily="@font/alata"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Nghiem Truong" />
@@ -42,7 +42,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        tools:text="This is a tweet!" />
+        tools:text="This is a tweet!"
+        android:autoLink="all"/>
 
     <TextView
         android:id="@+id/tvTimestamp"
