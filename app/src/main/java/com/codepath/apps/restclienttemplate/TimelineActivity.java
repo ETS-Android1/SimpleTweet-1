@@ -33,6 +33,11 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        //Display Twitter logo
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.twitter_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         client = TwitterApp.getRestClient(this);
 
