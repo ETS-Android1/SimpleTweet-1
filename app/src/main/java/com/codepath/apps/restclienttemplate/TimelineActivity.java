@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,8 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcel;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,7 @@ import java.util.List;
 import okhttp3.Headers;
 
 public class TimelineActivity extends AppCompatActivity {
-
+    private final int REQUEST_CODE = 20;
     public static final String TAG = "TimelineActivity";
 
     TwitterClient client;
@@ -94,8 +97,7 @@ public class TimelineActivity extends AppCompatActivity {
            Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
            //Navigate to the compose activity
            Intent intent = new Intent(this, ComposeActivity.class);
-           startActivity(intent);
-
+           startActivityForResult(intent, REQUEST_CODE);
            return true;
        }
         return super.onOptionsItemSelected(item);
@@ -124,7 +126,21 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure for loadMoreData", throwable);
             }
         }, tweets.get(tweets.size()-1).id);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            //get data from intent (tweet)
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            //update the RV with the tweet
+            //Modify the data source
+            tweets.add(0,tweet);
+            //Update the adapter
+            adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
 
     }
 
