@@ -85,6 +85,8 @@ public class TimelineActivity extends AppCompatActivity {
         fabTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), ComposeActivity.class);
+                startActivityForResult(myIntent, REQUEST_CODE);
             }
         });
 
